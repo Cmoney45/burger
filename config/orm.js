@@ -2,7 +2,6 @@ const connection = require(`./connection`);
 
 const orm = {};
 
-
 //Method for selecting all items from DB
 orm.selectAll = (cb) => {
     const query = `SELECT * FROM burgers`;
