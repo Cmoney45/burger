@@ -20,9 +20,10 @@ router.post(`/api/burgers`, function (req, res) {
         ],
         [
             req.body.name, req.body.devoured
-        ], function (result) {
-            res.json({ id: result.insertId })
-        })
+        ], 
+        function (result) {
+            res.json({ id: result.insertId });
+        });
 });
 
 router.put(`/api/burgers/:id`, function (req, res) {

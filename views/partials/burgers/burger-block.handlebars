@@ -1,9 +1,10 @@
-<li>
-	{{burger_name}}
-
-	<button class="change-eaten" data-id="{{id}}" data-devoured="{{devoured}}">
-		{{#if devoured}}Eat me!{{else}}Create another!{{/if}}
-	</button>
-
-	<button class="delete-burger" data-id="{{id}}">Take of the menu!</button>
-</li>
+<article class="style">
+    <span class="image">
+        <img src='/images/{{id}}.jpg'>
+    </span>
+    <h2>{{burger_name}}</h2>
+    <button class="change-eaten button primary" data-id="{{id}}" data-devoured="{{devoured}}">
+        {{#if devoured}}Eat me!{{else}}Create another!{{/if}}
+    </button>
+    <button class="delete-burger" data-id="{{id}}">Take of the menu!</button>
+</article>
