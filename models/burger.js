@@ -12,16 +12,21 @@ burger.all = (cb) => {
 };
 
 burger.create = (columns, values, cb) => {
-    orm.create(burger.tableName, columns, values, function(res) {
-        cb(res);
+    orm.create(burger.tableName, columns, values, function(createRes) {
+        cb(createRes);
     });
 };
 
 burger.update = (objectValues, condition, cb) => {
-    orm.updateOne(burger.tableName, objectValues, condition, function(res) {
-        cb(res);
+    orm.updateOne(burger.tableName, objectValues, condition, function(updateRes) {
+        cb(updateRes);
     })
 }
 
+burger.delete = (condition, cb) => {
+    orm.delete(burger.tableName, condition, function(deleteRes) {
+        cb(deleteRes)
+    })
+}
 
 module.exports = burger;

@@ -26,17 +26,18 @@ $(function() {
       event.preventDefault();
   
       var newburger = {
-        name: $("#ca").val().trim(),
-        devoured: $("[name=devoured]:checked").val().trim()
+        name: $("#burger_name").val().trim(),
+        devoured: $("[name=devoured]:checked").val().trim(),
+        picture: $(`#burger_pic`).val().trim()
       };
-  
+      console.log(newburger);
       // Send the POST request.
       $.ajax("/api/burgers", {
         type: "POST",
         data: newburger
       }).then(
         function() {
-          console.log("created new burger");
+          console.log("Created new burger!");
           // Reload the page to get the updated list
           location.reload();
         }

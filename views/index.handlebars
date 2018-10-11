@@ -3,37 +3,53 @@
     <h1>Burgers that are not Devoured!</h1>
     <section class="tiles">
         {{#each burgers}}
-          {{#unless devoured}}
-              {{> burgers/burger-block devoured=true}}
-          {{/unless}}
+        {{#unless devoured}}
+        {{> burgers/burger-block devoured=true}}
+        {{/unless}}
         {{/each}}
     </section>
 </section>
+<hr>
+<hr>
 <h2>Burgers that are Devoured!</h2>
 <section>
     <section class="tiles">
         {{#each burgers}}
-            {{#if devoured}}
-             {{> burgers/burger-block devoured=false}}
-            {{/if}}
+        {{#if devoured}}
+        {{> burgers/burger-block devoured=false}}
+        {{/if}}
         {{/each}}
     </section>
 </section>
 </div>
 <br>
 <br>
-<h2>Add a burger</h2>
+<hr>
+<hr>
+<h2>Add a new burger below!</h2>
 <form class="create-form">
+    <div class="row gtr-uniform">
 
-    <div class="form-group">
-        <label for="ca">Burger Name:</label>
-        <input type="text" id="ca" name="name">
-    </div>
+        <div class="col-12">
+            <h2>Burger Name:</h2>
+            <input type="text" id="burger_name" name="name" placeholder="Cheeseburger">
+        </div>
+        <div class="col-12">
+            <h2>Burger Image:</h2>
+            <input type="text" id="burger_pic" name="name" placeholder="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cheeseburger.jpg/1200px-Cheeseburger.jpg">
+        </div>
 
-    <div class="form-group">
-        <label for="eaten">Eaten?</label><br>
-        <input type="radio" name="devoured" value="1" checked> Devoured!<br>
-        <input type="radio" name="devoured" value="0"> Not Devoured
+        <div class="form-group">
+            <h2>Eaten?</h2>
+            <div class="col-6 col-12-small">
+                <input type="radio" id="devoured" name="devoured" value="1" checked>
+                <label for="devoured">Devoured!</label><br>
+            </div>
+            <div class="col-6 col-12-small">
+                <input type="radio" id="not-devoured" name="devoured" value="0">
+                <label for="not-devoured">Not Devoured</label>
+            </div>
+        </div>
     </div>
 
     <button type="submit">Add Burger</button>

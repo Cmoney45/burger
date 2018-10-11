@@ -2,6 +2,8 @@ const connection = require(`./connection`);
 
 const orm = {};
 
+// Method for creating multipl condition values 
+    // If it has 2 conditions allows below methos to do (?, ?)
 orm.createQuestionMarkValues = (number) => {
     let arr = [];
 
@@ -20,12 +22,12 @@ orm.objectToSqlValues = (object) => {
         let value = object[key];
         // check to skip hidden properties
         if (Object.hasOwnProperty.call(object, key)) {
-            // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+            // if string with spaces, add quotations (Mushroom Swiss => 'Mushroom Swiss')
             if (typeof value === "string" && value.indexOf(" ") >= 0) {
-                value = "'" + value + "'";
+                value = `'${value}'`;
             }
-            // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
-            // e.g. {sleepy: true} => ["sleepy=true"]
+            // e.g. {name: 'Mushroom Swiss'} => ["name='Mushroom Swiss'"]
+            // e.g. {devoured: true} => ["devoured=true"]
             arr.push(key + "=" + value);
         }
     }
@@ -34,26 +36,26 @@ orm.objectToSqlValues = (object) => {
     return arr.toString();
 }
 
-//Method for selecting all items from DB
+// Method for selecting all items from DB
 orm.selectAll = (table, cb) => {
     const query = `SELECT * FROM ${table}`;
 
-    connection.query(query, (err, res) => {
-        if (err) throw err;
+    connection.query(query, (selectAllErr, selectAllRes) => {
+        if (selectAllErr) throw selectAllErr;
 
-        cb(res);
+        cb(selectAllRes);
     });
 };
 
-//Method to the ORM to add a burger
+// Method to the ORM to add a burger
 orm.create = (table, columns, values, cb) => {
     const query = `INSERT INTO ${table} (${columns.toString()}) 
     VALUES (${orm.createQuestionMarkValues(values.length)})`;
     console.log(query);
-    connection.query(query, values, (err, res) => {
-        if (err) throw err;
+    connection.query(query, values, (createError, createRes) => {
+        if (createError) throw createError;
 
-        cb(res);
+        cb(createRes);
     });
 };
 
@@ -63,12 +65,24 @@ orm.updateOne = (table, objectValues, condition, cb) => {
             SET ${orm.objectToSqlValues(objectValues)}
             WHERE ${condition}`;
     console.log(query);
-    connection.query(query, (err, res) => {
-        if (err) throw err;
+    connection.query(query, (updateError, updateRes) => {
+        if (updateError) throw updateError;
 
-        cb(res);
+        cb(updateRes);
     });
 };
+
+// Method to delete a single entry
+
+orm.delete = (table, condition, cb) => {
+    const query = `DELETE FROM ${table} WHERE ${condition}`
+
+    connection.query(query, function(delError, result) {
+        if (delError) throw delError;
+
+        cb(result)
+    })
+}
 
 
 module.exports = orm;
