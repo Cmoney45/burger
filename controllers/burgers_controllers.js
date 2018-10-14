@@ -1,10 +1,9 @@
 const express = require(`express`);
 const burger = require(`../models/burger`);
-const seperator = `---------------------------------------------------------------`;
 
 const router = express.Router();
 
-router.get(`/`, function (req, res) {
+router.get('/', function (req, res) {
     burger.all(function (data) {
         let hbsObject = {
             burgers: data
@@ -27,7 +26,7 @@ router.post(`/api/burgers`, function (req, res) {
         });
 });
 
-router.put(`/api/burgers/:id`, function (req, res) {
+router.put('/api/burgers/:id', function (req, res) {
     const condtion = `id = ${req.params.id}`;
     console.log(`condition:${condtion}`);
 
@@ -42,7 +41,7 @@ router.put(`/api/burgers/:id`, function (req, res) {
     });
 });
 
-router.delete(`/api/burgers/:id`, function(req, res) {
+router.delete('/api/burgers/:id', function(req, res) {
     const deletCondition = `id = ${req.params.id}`
     console.log(`condition:${deletCondition}`);
 
