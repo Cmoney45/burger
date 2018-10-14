@@ -4,7 +4,7 @@ const routes = require(`./controllers/burgers_controllers`);
 const path = require("path");
 
 
-const PORT = process.env.port || 8080;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use(express.static(path.join(__dirname, `./public`)));
