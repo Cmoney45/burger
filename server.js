@@ -1,11 +1,13 @@
 const express = require(`express`);
 const exphbs = require(`express-handlebars`);
 const routes = require(`./controllers/burgers_controllers`);
+const path = require("path");
+
 
 const PORT = process.env.port || 8080;
 const app = express();
 
-app.use(express.static(`public`));
+app.use(express.static(path.join(__dirname, `./public`)));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -17,5 +19,5 @@ app.use(routes);
 
 app.listen(PORT, function() {
 
-    console.log(`Server listening on: http://localhost:${PORT}`);
+    console.log(`Server listening on: ${PORT}`);
 })
