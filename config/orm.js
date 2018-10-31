@@ -77,7 +77,7 @@ orm.updateOne = (table, objectValues, condition, cb) => {
 orm.delete = (table, condition, cb) => {
     const query = `DELETE FROM ${table} WHERE ${condition}`
 
-    connection.query(query, function(delError, result) {
+    connection.query(query, (delError, result) => {
         if (delError) throw delError;
 
         cb(result)

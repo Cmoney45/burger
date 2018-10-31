@@ -1,10 +1,9 @@
 const express = require(`express`);
 const burger = require(`../models/burger`);
-
 const router = express.Router();
 
-router.get('/', function (req, res) {
-    burger.all(function (data) {
+router.get('/', (req, res) => {
+    burger.all(data => {
         let hbsObject = {
             burgers: data
         };
@@ -13,7 +12,7 @@ router.get('/', function (req, res) {
     })
 })
 
-router.post(`/api/burgers`, function (req, res) {
+router.post(`/api/burgers`, (req, res) => {
     burger.create(
         [
             `burger_name`, `devoured`, `burger_pic`
@@ -21,18 +20,18 @@ router.post(`/api/burgers`, function (req, res) {
         [
             req.body.name, req.body.devoured, req.body.picture
         ], 
-        function (result) {
+        (result) => {
             res.json({ id: result.insertId });
         });
 });
 
-router.put('/api/burgers/:id', function (req, res) {
+router.put('/api/burgers/:id', (req, res) => {
     const condtion = `id = ${req.params.id}`;
     console.log(`condition:${condtion}`);
 
     burger.update({
         devoured: req.body.devoured
-    }, condtion, function (result) {
+    }, condtion, result => {
         if (result.changedRows == 0) {
             return res.status(404), end();
         } else {
@@ -41,11 +40,11 @@ router.put('/api/burgers/:id', function (req, res) {
     });
 });
 
-router.delete('/api/burgers/:id', function(req, res) {
+router.delete('/api/burgers/:id', (req, res) => {
     const deletCondition = `id = ${req.params.id}`
     console.log(`condition:${deletCondition}`);
 
-    burger.delete(deletCondition, function(result) {
+    burger.delete(deletCondition, result => {
         if(result.affectedRows == 0) {
             return res.status(404).end();
         } else {

@@ -12,19 +12,19 @@ burger.all = (cb) => {
 };
 
 burger.create = (columns, values, cb) => {
-    orm.create(burger.tableName, columns, values, function(createRes) {
+    orm.create(burger.tableName, columns, values, createRes => {
         cb(createRes);
     });
 };
 
 burger.update = (objectValues, condition, cb) => {
-    orm.updateOne(burger.tableName, objectValues, condition, function(updateRes) {
+    orm.updateOne(burger.tableName, objectValues, condition, updateRes => {
         cb(updateRes);
     })
 }
 
 burger.delete = (condition, cb) => {
-    orm.delete(burger.tableName, condition, function(deleteRes) {
+    orm.delete(burger.tableName, condition, deleteRes => {
         cb(deleteRes)
     })
 }
